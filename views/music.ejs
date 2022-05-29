@@ -1,0 +1,44 @@
+<%- include('common/header') %>
+<div class="container mt-lg-2">
+
+    <div class="row d-flex align-items-center">
+        <div class="col-md-8 col-sm-12"><h1>Muziek luisteren</h1></div>
+        <div class="col-md-4 col-sm-12">
+            <input id="search" class="form-control" placeholder="Zoeken...">
+        </div>
+    </div>
+
+    <div class="row">
+        <%
+        if (albums.length > 0){
+        albums.forEach((album, i) =>{ %>
+            <div class="col-sm-6 col-md-4 col-lg-3 p-2 searchable_item"
+                 data-search="<%= album.name + ' ' + album.artist %>">
+
+                <div class="card">
+                    <div class="view overlay thumbnail-view">
+                        <img src="<%= album.thumbnail %>" class="card-img-top thumbnail-image"
+                             alt="<%= album.name %>">
+                    </div>
+                    <div class="card-body text-left">
+                        <div class="mi-album px-2">
+                            <h5 class="card-title font-weight-bold"><%= album.name %></h5>
+                            <h6 class="card-title"><%= album.artist %></h6>
+                            <h6 class="card-title"><%= album.quantityTracks %> Tracks</h6>
+                        </div>
+
+                        <a href="/music/play?album=<%= album.code %>"
+                           class="btn btn-lg btn-success btn-floating floating_play_btn d-flex justify-content-center align-items-center">
+                            <span class="material-icons mx-1">play_circle</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <% }); }else { %>
+            <div class="alert alert-warning " role="alert" data-mdb-color="success">
+                Geen muziek albums gevonden!
+            </div>
+        <% } %>
+    </div>
+</div>
+<%- include('common/footer') %>

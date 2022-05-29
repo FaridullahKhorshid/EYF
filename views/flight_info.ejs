@@ -1,0 +1,62 @@
+<%- include('common/header') %>
+
+<div class="container">
+
+    <div class="row font-weight-bold">
+        <div class="my-3 col-12">
+            <h4><strong id="flight_info_title">Vluchtinformatie</strong></h4>
+        </div>
+        <div class=" d-flex mb-4">
+            <div id="origen_info" class=" " style="text-align: right;">
+                <div class="d-flex justify-content-start">
+                    <span class="material-icons mx-2">near_me</span>
+                    <strong id="departure_name">Amsterdam</strong>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <span class="material-icons mx-2">flight_takeoff</span>
+                    <strong id="departure_time">12:00</strong>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <span class="material-icons mx-2">wb_sunny</span>
+                    <strong id="local_weather">12&#176;</strong>
+                </div>
+            </div>
+
+            <div class="mx-4 d-flex flex-column align-items-center">
+                <span class="material-icons"
+                      style="font-size: 49px;transform: rotate(90deg); color: #BC6C25;">flight</span>
+                <small class="text-center">
+                    <small>Tijdsduur: 2:35</small>
+                </small>
+            </div>
+
+            <div id="origen_info" class="">
+                <div class="d-flex justify-content-start">
+                    <span class="material-icons mx-2">location_on</span>
+                    <strong id="departure_name">Madrid</strong>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <span class="material-icons mx-2">flight_land</span>
+                    <strong id="departure_time">14:35</strong>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <span class="material-icons mx-2">wb_sunny</span>
+                    <strong id="local_weather">28&#176;</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="no_gps_usage" class="alert alert-warning d-flex d-none" role="alert" data-mdb-color="warning">
+        <span class="material-icons">info</span> Geeft toegang om uw locatie te gebruiken!
+    </div>
+
+    <div id="flight_info_map"></div>
+</div>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/geodata/worldLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="/js/flight_info.js"></script>
+
+<%- include('common/footer') %>

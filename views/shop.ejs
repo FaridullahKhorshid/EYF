@@ -1,0 +1,86 @@
+<%- include('common/header') %>
+<div class="container">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white" style="top: 60px;">
+            <div class="container-fluid">
+                <button
+                        class="navbar-toggler <%= (type != undefined? 'active '  : '')%>"
+                        data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarExample01"
+                        aria-controls="navbarExample01"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                >
+                    <span class="material-icons ">filter_alt</span>
+                </button>
+
+                <% if(type != undefined){%>
+                <a href="/shop" class="navbar-toggler text-danger">
+                    <span class="material-icons ">backspace</span>
+                </a>
+                <%}%>
+
+                <div class="collapse navbar-collapse justify-content-center" id="navbarExample01">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item ">
+                            <a class="nav-link h4 danger-color <%= (type != undefined? ' '  : 'active')%>" aria-current="page" href="/shop">Shop home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link h4 <%= (type != undefined && type == 'drinks'? 'active '  : '')%>" href="/shop?type=drinks">Drinken</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link h4 <%= (type != undefined && type == 'food'? 'active '  : '')%>" href="/shop?type=food">Eten</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link h4 <%= (type != undefined && type == 'luxury'? 'active '  : '')%>" href="/shop?type=luxury">Luxe artikelen</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="bg-light p-1">
+            <div class="row mt-2 ">
+                <% products.forEach( function(product, i) { %>
+                    <div class="col-sm-6 col-md-4 col-lg-3 p-2">
+                        <div class="card" id="<%= 'product-' + product.id %>">
+                            <!-- Card image -->
+                            <div class="view overlay thumbnail-view">
+                                <img class="card-img-top thumbnail-image"
+                                     src="<%= product.image %>"
+                                     alt="Card image cap">
+                            </div>
+                            <!-- Card content -->
+                            <div class="card-body">
+                                <!-- Title -->
+                                <div class="card-content">
+
+                                    <h5 class="card-title"><%= product.name %></h5>
+                                    <h5 class="m-1">
+                                        <span class="text-danger mr-1">€ <%= product.price %></span>
+                                    </h5>
+                                    <div class="d-flex">
+                                        <label for="<%= 'quantity-' + product.id %>">
+                                        </label><select id="<%= 'quantity-' + product.id %>" name="quantity"
+                                                        class="form-select mx-1">
+                                            <option selected value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                        <a class="btn btn-danger mx-1" data-id="<%= product.id %>"
+                                           data-name="<%= product.name %>"
+                                           data-price="<%= product.price %>"
+                                           data-productType="<%= product.type %>"
+                                           onclick="addToShoppingCart(this)">
+                                            <span class="material-icons">add_shopping_cart</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+</div>
+<%- include('common/footer') %>

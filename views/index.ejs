@@ -1,0 +1,138 @@
+<!-- including header -->
+<%- include('common/header') %>
+
+<div id="header-banner" class="text-center bg-image"> <!-- Background image -->
+    <div class="container-fluid py-4 h-100">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+
+                <!-- card for films-->
+                <div class="swiper-slide">
+                    <a href="/film" class="h-100 w-100">
+                        <div class="card-content w-100 h-100">
+                            <img class="img-fluid" src="/images/films-card.jpg" alt="Films">
+
+                            <div class="mask swiper-card-mask p-2">
+                                <div class="text-white h-75">
+                                    <h2>Films</h2>
+                                    <p class="text-white mb-0">Premium film aanbod</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+                <!-- card for films-->
+                <div class="swiper-slide">
+                    <a href="/game" class="h-100 w-100 ">
+                        <div class="card-content w-100 h-100">
+                            <img class="img-fluid" src="/images/games-card.jpg" alt="Games">
+
+                            <div class="mask swiper-card-mask p-2">
+                                <div class="text-white h-75">
+                                    <h2>Games</h2>
+                                    <p class="text-white mb-0">Singleplayer game aanbod</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+                <!-- card for films-->
+                <div class="swiper-slide">
+                    <a href="/shop" class="h-100 w-100">
+                        <div class="card-content w-100 h-100">
+                            <img class="img-fluid" src="/images/shop-card.jpg" alt="Shop">
+
+                            <div class="mask swiper-card-mask p-2">
+                                <div class="text-white h-75">
+                                    <h2>Shoppen</h2>
+                                    <p class="text-white mb-0">Bekijk de shop</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+                <!-- card for films-->
+                <div class="swiper-slide">
+                    <a href="/music" class="h-100 w-100">
+                        <div class="card-content w-100 h-100">
+                            <img class="img-fluid" src="/images/audio-card.jpg" alt="Muziek">
+
+                            <div class="mask swiper-card-mask p-2">
+                                <div class="text-white h-75">
+                                    <h2>Muziek</h2>
+                                    <p class="text-white mb-0">Muziek is de beste manier om de tijd te verteren. </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</div> <!-- Background image -->
+
+
+<div class="container my-4 bg-light">
+
+    <h1 class="font-weight-bold">De populairste producten</h1>
+    <hr>
+
+    <div class="row mt-2 justify-content-md-center">
+        <%
+        var index = Math.random() * (products.length - 4);
+
+        var productsSorted = products.sort(function(){return .5 - Math.random()});
+
+        productsSorted.slice(0, 4).forEach( function(product) { %>
+            <!-- Card -->
+            <div class="col-sm-6 col-md-4 col-lg-3 p-2">
+                <div class="card" id="<%= 'product-' + product.id %>">
+                    <!-- Card image -->
+                    <div class="view overlay thumbnail-view">
+                        <img class="card-img-top thumbnail-image"
+                             src="<%= product.image %>"
+                             alt="Card image cap">
+                    </div>
+                    <!-- Card content -->
+                    <div class="card-body">
+                        <!-- Title -->
+                        <div class="card-content">
+                            <h5 class="card-title"><%= product.name %></h5>
+                            <h5 class="m-1">
+                                <span class="text-danger mr-1">€ <%= product.price %></span>
+                            </h5>
+                            <div class="d-flex">
+                                <label for="<%= 'quantity-' + product.id %>"></label>
+                                <select id="<%= 'quantity-' + product.id %>" name="quantity" class="form-select mx-1">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                                <a class="btn btn-danger mx-1" data-id="<%= product.id %>"
+                                   data-name="<%= product.name %>"
+                                   data-price="<%= product.price %>"
+                                   data-productType="<%= product.type %>"
+                                   onclick="addToShoppingCart(this)">
+                                    <span class="material-icons">add_shopping_cart</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+
+<!-- including footer -->
+<%- include('common/footer') %>

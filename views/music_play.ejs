@@ -1,0 +1,87 @@
+<%- include('common/header') %>
+<div class="container music_container">
+
+    <audio id="music_song" src="/audio/beyonce.mp3" type="audio/mpeg"></audio>
+
+    <div class="row">
+        <div class="p-4 col-4 d-flex justify-content-start align-items-center">
+            <a href="/music" class="heading text-uppercase d-flex justify-content-start align-items-center pointer">
+                <span class="material-icons">arrow_back</span> Terug
+            </a>
+        </div>
+
+        <div class="p-4 col-8 d-flex justify-content-end align-items-center">
+            <div class="heading text-uppercase">
+                Playing Now <small class="text-success"><%= album.name %></small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center align-items-center ">
+            <div class="image-outer shadows-outer d-flex justify-content-center align-items-center">
+                <div class="image">
+                    <img id="music_thumbnail" src="<%= album.thumbnail %>" alt="Music image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4 mb-4">
+        <div class="col-12 d-flex flex-column justify-content-center align-items-center ">
+            <h5 id="music_song_title" class="song">...</h5>
+            <span id="music_artist" class="artist"><%= album.artist %></span>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-12 d-flex justify-content-between px-4 ">
+            <span id="music_current_time" class="seek-label">0:00</span>
+            <span id="music_max_time" class="seek-label">0:00</span>
+        </div>
+    </div>
+
+    <div class="row px-4 mb-2">
+        <div class="col-12 px-0 position-relative">
+            <input id="music_song_seek_bar" class="seek-bar-bg w-100" type="range" min="1" max="100" value="1">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="p-4 col-12 d-flex justify-content-center align-items-center ">
+            <div class="big-circle-outer shadows-outer d-flex justify-content-center align-items-center mx-1 music_btn">
+                <div id="music_queue"
+                     class="big-circle-inner shadows-inner d-flex justify-content-center align-items-center ">
+                    <span class="material-icons">queue_music</span>
+                </div>
+            </div>
+            <div class="big-circle-outer shadows-outer d-flex justify-content-center align-items-center mx-1 music_btn">
+                <div id="music_song_previous"
+                     class="big-circle-inner shadows-inner d-flex justify-content-center align-items-center ">
+                    <span class="material-icons">skip_previous</span>
+                </div>
+            </div>
+            <div id="music_song_play_pause"
+                 class="big-circle-outer shadows-outer d-flex justify-content-center align-items-center mx-1 music_btn">
+                <div class="blue-button big-circle-inner shadows-inner d-flex justify-content-center align-items-center ">
+                    <span class="material-icons">play_circle</span>
+                </div>
+            </div>
+            <div id="music_song_next"
+                 class="big-circle-outer shadows-outer d-flex justify-content-center align-items-center mx-1 music_btn">
+                <div class="big-circle-inner shadows-inner d-flex justify-content-center align-items-center ">
+                    <span class="material-icons">skip_next</span>
+                </div>
+            </div>
+            <div id="music_song_shuffle"
+                 class="big-circle-outer color-success shadows-outer d-flex justify-content-center align-items-center mx-1 music_btn">
+                <div class="big-circle-inner shadows-inner d-flex justify-content-center align-items-center ">
+                    <span class="material-icons">shuffle</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<%- include('common/footer') %>
+<script type="text/javascript" src="/js/music.js"></script>

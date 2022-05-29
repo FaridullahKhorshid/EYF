@@ -1,0 +1,42 @@
+<%- include('common/header') %>
+<div class="container mt-lg-2">
+
+    <div class="row d-flex align-items-center">
+        <div class="col-md-8 col-sm-12"><h1>Bekijk de laatste films</h1></div>
+        <div class="col-md-4 col-sm-12">
+            <input id="search" class="form-control" placeholder="Zoeken...">
+        </div>
+    </div>
+
+    <div class="row">
+        <%
+        if (films.length > 0){
+
+        films.forEach((film, i) =>{ %>
+            <div class="col-sm-6 col-md-4 col-lg-4 p-2 searchable_item" data-search="<%= film.name %>">
+
+                <div class="card">
+                    <div class="view overlay thumbnail-view">
+                        <img src="<%= film.poster %>" class="card-img-top thumbnail-image"
+                             alt="<%= film.name %>">
+                    </div>
+                    <div class="card-body text-left">
+                        <div class="mi-album px-2">
+                            <h5 class="card-title font-weight-bold"><%= film.name %></h5>
+                        </div>
+
+                        <a href="/film/play?code=<%= film.code %>"
+                           class="btn btn-lg btn-danger btn-floating floating_play_btn d-flex justify-content-center align-items-center">
+                            <span class="material-icons mx-1">play_circle</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <% }); }else { %>
+            <div class="alert alert-warning " role="alert" data-mdb-color="success">
+                Geen films gevonden!
+            </div>
+        <% } %>
+    </div>
+</div>
+<%- include('common/footer') %>

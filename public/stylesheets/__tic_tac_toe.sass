@@ -1,0 +1,172 @@
+.board
+  display: grid
+  justify-content: center
+  align-content: center
+  justify-items: center
+  align-items: center
+  grid-template-columns: repeat(3, auto)
+
+.cell
+  width: 100px
+  height: 100px
+  border: 2px solid #BC6C25
+  display: flex
+  justify-content: center
+  align-items: center
+  position: relative
+  cursor: pointer
+  border-radius: 12px
+
+  &:first-child, &:nth-child(2), &:nth-child(3)
+    border-top: none
+
+  &:nth-child(3n + 1)
+    border-left: none
+
+  &:nth-child(3n + 3)
+    border-right: none
+
+  &:last-child, &:nth-child(8), &:nth-child(7)
+    border-bottom: none
+
+  &.x, &.o
+    cursor: not-allowed
+
+  &.x
+    &::before, &::after
+      background-color: #283618
+
+  &.o::before
+    background-color: #283618
+
+.board
+  &.x .cell:not(.x):not(.o):hover
+    &::before, &::after
+      background-color: #606C38
+
+  &.o .cell:not(.x):not(.o):hover::before
+    background-color: #606C38
+
+.cell.x
+  &::before, &::after
+    content: ''
+    position: absolute
+    width: calc(100px * .15)
+    height: calc(100px * .9)
+
+.board.x .cell:not(.x):not(.o):hover
+  &::before, &::after
+    content: ''
+    position: absolute
+    width: calc(100px * .15)
+    height: calc(100px * .9)
+
+.cell.x::before, .board.x .cell:not(.x):not(.o):hover::before
+  transform: rotate(45deg)
+
+.cell.x::after, .board.x .cell:not(.x):not(.o):hover::after
+  transform: rotate(-45deg)
+
+.cell.o
+  &::before, &::after
+    content: ''
+    position: absolute
+    border-radius: 50%
+
+.board.o .cell:not(.x):not(.o):hover
+  &::before, &::after
+    content: ''
+    position: absolute
+    border-radius: 50%
+
+.cell.o::before, .board.o .cell:not(.x):not(.o):hover::before
+  width: calc(100px * .9)
+  height: calc(100px * .9)
+
+.cell.o::after, .board.o .cell:not(.x):not(.o):hover::after
+  width: calc(100px * .6)
+  height: calc(100px * .6)
+  background-color: white
+
+.winning-message
+  display: none
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background-color: #ffffffd6
+  justify-content: center
+  align-items: center
+  font-size: 34px
+  font-weight: bolder
+  color: #BC6C25
+  flex-direction: column
+
+  &.show
+    display: flex !important
+
+/*    player
+
+.player_o
+  width: 100px
+  height: 100px
+  border: 2px solid #BC6C25
+  display: flex
+  justify-content: center
+  align-items: center
+  position: relative
+  cursor: pointer
+  border-radius: 12px
+
+.player_x
+  width: 100px
+  height: 100px
+  border: 2px solid #BC6C25
+  display: flex
+  justify-content: center
+  align-items: center
+  position: relative
+  cursor: pointer
+  border-radius: 12px
+
+  &::after
+    content: ''
+    position: absolute
+    width: calc(100px * .15)
+    height: calc(100px * .9)
+    background-color: #283618
+
+  &::before
+    content: ''
+    position: absolute
+    width: calc(100px * .15)
+    height: calc(100px * .9)
+    background-color: #283618
+    transform: rotate(45deg)
+
+  &::after
+    transform: rotate(-45deg)
+
+.player_o
+  &::after
+    content: ''
+    position: absolute
+    border-radius: 50%
+
+  &::before
+    content: ''
+    position: absolute
+    border-radius: 50%
+    width: calc(100px * .9)
+    height: calc(100px * .9)
+    background-color: #283618
+
+  &::after
+    width: calc(100px * .6)
+    height: calc(100px * .6)
+    background-color: white
+
+.selected_player
+  border: 4px solid
+  box-shadow: -6px 17px 26px -9px #000000

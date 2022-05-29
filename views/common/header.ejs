@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/images/logo-nav.png">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color:#FEFAE0;">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a class="navbar-brand p-0" href="/">
+            <img class="logo" src="/images/logo-nav.png" alt="Tulip Air"/>
+        </a>
+        <!-- Icons -->
+        <ul id="global-nav-items" class="navbar-nav d-flex flex-row">
+
+            <li class="nav-item me-3 me-lg-0">
+                <a class="nav-link" href="/voucher">
+                    <span class="material-icons">wifi</span>
+                </a>
+            </li>
+            <li class="nav-item me-3 me-lg-0">
+                <a class="nav-link pointer"
+                   data-mdb-toggle="modal"
+                   data-mdb-target="#shopping_cart_modal"
+                >
+                    <span class="material-icons">shopping_cart</span>
+                    <span id="shopping_cart_total_badge"
+                          class="badge rounded-pill badge-notification bg-danger"><%= shoppingCart.totalQuantity %></span>
+                </a>
+            </li>
+            <% if (!loggedIn) { %>
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" href="/user">
+                        <span class="material-icons">login</span>
+                    </a>
+                </li>
+            <% } else{ %>
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link d-flex" href="/user/logout">
+                        <%= username %><span class="material-icons">logout</span>
+                    </a>
+                </li>
+            <% } %>
+
+        </ul>
+        <!-- Toggle button -->
+        <button id="menu-toggler" class="navbar-toggler" data-mdb-toggle="collapse"
+                data-mdb-target="#tulip-air-navbar-content" aria-controls="tulip-air-navbar-content"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="tulip-air-navbar-content">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- Link -->
+                <li class="nav-item">
+                    <a class="nav-link" id="shop" href="/shop">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="chat" href="/chat">Chat</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="flight_info" href="/flight_info">Vluchtinformatie</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbar_entertainment" role="button"
+                       data-mdb-toggle="dropdown" aria-expanded="false">Entertainment</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbar_entertainment">
+                        <li>
+                            <a id="music" class="dropdown-item d-flex align-content-center" href="/music">
+                                <span class="material-icons">headphones</span> Muziek
+                            </a>
+                        </li>
+                        <li>
+                            <a id="film" class="dropdown-item d-flex align-content-center" href="/film">
+                                <span class="material-icons">movie</span> Films
+                            </a>
+                        </li>
+                        <li>
+                            <a id="game" class="dropdown-item d-flex align-content-center" href="/game">
+                                <span class="material-icons">sports_esports</span> Games
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <% if(loggedIn) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" id="admin" href="/admin">Admin</a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="shopping_cart_container">
+
+</div>
+
+<div id="main-content">

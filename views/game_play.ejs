@@ -1,0 +1,9 @@
+<%- include('common/header') %>
+<div class="container">
+    <h1 class="py-4">Play Game <%= game.name %></h1>
+
+    <!-- load game file-->
+    <%- include('games/' + game.code) %>
+
+</div>
+<%- include('common/footer') %>

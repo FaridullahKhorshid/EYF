@@ -1,0 +1,15 @@
+<div id="pong_container">
+    <div class="ping_pong_message d-flex flex-column justify-content-center align-items-center d-none" id="winning_message">
+        <strong>Je hebt gewonnen!</strong>
+        <button onclick="window.location.reload()" class="btn btn-outline-info">Opnieuwe spelen</button>
+    </div>
+    <div class="ping_pong_message d-flex flex-column justify-content-center align-items-center d-none"
+         id="losing_message">
+        <strong>Helaas je hebt verloren!</strong>
+        <button onclick="window.location.reload()" class="btn btn-outline-info">Opnieuwe spelen</button>
+    </div>
+
+    <canvas id="ping_pong_bg"></canvas>
+    <canvas id="ping_pong_game"></canvas>
+</div>
+<script type="text/javascript" src="../js/ping_pong.js"></script>

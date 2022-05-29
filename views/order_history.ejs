@@ -1,0 +1,76 @@
+<%- include('common/header') %>
+<div class="container mt-lg-2">
+    <div class="row d-flex align-items-center">
+        <div class="col-md-8 col-sm-12"><h1>Orders</h1></div>
+    </div>
+    <div class="row order_table">
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Stoelnummer</th>
+                <th scope="col">Achternaam</th>
+                <th scope="col">type</th>
+                <th scope="col">Status</th>
+                <th scope="col">Totaal</th>
+                <th scope="col">Datum</th>
+                <th scope="col">Acties</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% orders.forEach(function(item, i) { %>
+                <tr id="<%= item.order.id %>">
+                    <th scope="row"><%= item.order.id %></th>
+                    <td><%= item.order.seatNumber %></td>
+                    <td><%= item.order.lastName %></td>
+                    <td><%= item.order.paymentType %></td>
+                    <td><%= item.order.orderStatus %></td>
+                    <td>&euro;<%= item.order.totalPrice %></td>
+                    <td><%- formatDate(item.order.date); %></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="deleteOrder(<%= item.order.id %>)">
+                            <i class="material-icons">delete</i>
+                        </button>
+                        <button class="btn btn-primary btn-sm" onclick="expandRow(<%= item.order.id %>)">
+                            <i class="material-icons">expand_more</i>
+                        </button>
+                    </td>
+                </tr>
+                <tr id="child_<%= item.order.id %>">
+                    <td colspan="8" class="border-0 px-2">
+                        <table class="table table-sm table-bordered table-info  d-none"
+                               id="expandRow<%= item.order.id %>">
+                            <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Prijs</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% item.products.forEach(function(product, i) { %>
+                                <tr>
+                                    <td><%= product.name %></td>
+                                    <td>&euro;<%= product.price %></td>
+                                </tr>
+                            <% }); %>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function expandRow(orderId) {
+        const rowElement = document.getElementById('expandRow' + orderId)
+        if (rowElement.classList.contains('d-none')) {
+            rowElement.classList.remove('d-none')
+        } else {
+            rowElement.classList.add('d-none')
+        }
+    }
+</script>
+
+<%- include('common/footer') %>

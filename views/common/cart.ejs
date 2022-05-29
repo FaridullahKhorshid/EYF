@@ -1,0 +1,96 @@
+<div class="modal fade" id="shopping_cart_modal" tabindex="-1" aria-labelledby="shopping_cart_modal_label"
+     aria-hidden="true" xmlns="http://www.w3.org/1999/html">
+
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <span class="material-icons">shopping_cart</span> Winkelmandje</h5>
+                <button
+
+                        class="btn-close"
+                        data-mdb-dismiss="modal"
+                        aria-label="Close"
+                ></button>
+            </div>
+            <div id="shoppingCartBody" class="modal-body">
+                <% if (shoppingCart.products.length > 0){ %>
+                    <div class="cart_table_container">
+                        <table class="table algin-middle p-0">
+                            <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Aantal</th>
+                                <th scope="col">Prijs</th>
+                                <th scope="col">Subtotaal</th>
+                                <th scope="col">Acties</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% shoppingCart.products.forEach((product) => { %>
+                                <tr id="cart_product_row_<%= product.id %>>">
+                                    <td><%= product.name %></td>
+                                    <td><%= product.amount %></td>
+                                    <td>&euro; <%= product.price %> </td>
+                                    <td>&euro; <%= product.price * product.amount %> </td>
+                                    <td>
+                                        <a role="button" style="color: #dd4b39;" data-product-id="<%= product.id %>" onclick="removeFromShoppingCart(this)">
+                                            <i class="material-icons">delete</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer border-0 px-0">
+                        <div class="row">
+                            <div class="row">
+                                <div class="alert alert-warning py-1 mt-1" role="alert" data-mdb-color="warning" id="alert_message">
+                                    <small>Biljetten van €100, €200 en €500 worden niet geaccepteerd!</small>
+                                </div>
+                            </div>
+                            <h6 class="col-12 p-0"><strong>Hoe wilt u betalen?</strong></h6>
+                            <div class="form-check col-12">
+                                <input class="form-check-input" type="radio" name="payment"
+                                       id="payment_credit_card" value="CreditCard" checked/>
+                                <label class="form-check-label" for="payment_credit_card">
+                                    Creditcard
+                                </label>
+                            </div>
+                            <div class="form-check col-12">
+                                <input class="form-check-input" type="radio" name="payment"
+                                       id="payment_cash" value="Contant"/>
+                                <label class="form-check-label" for="payment_cash">Contant</label>
+                            </div>
+
+                            <div class="col-12 p-0 mt-2">
+                                <label class="form-label m-0" for="surnameInput">Achternaam</label>
+                                <input type="text" id="surnameInput" class="form-control form-control-md" required/>
+                            </div>
+                            <div class="col-12 p-0 mt-2">
+                                <label class="form-label m-0" for="seatInput">Stoelnummer</label>
+                                <input type="text" id="seatInput" class="form-control form-control-md" required/>
+                            </div>
+
+                        </div>
+                        <div class="pull-right" style="margin: 10px">
+                            <div class="pull-right" style="margin: 5px">
+                                <div id="cart_total_price" data-total-price="<%= shoppingCart.totalPrice %>">
+                                    Totaal: &euro; <%= shoppingCart.totalPrice %>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="btn btn-success" id="shop" onclick="order()" data-mdb-dismiss="modal">Betalen</a>
+
+                    </div>
+
+                <% }else { %>
+                    <div class="alert alert-primary" role="alert" data-mdb-color="primary">
+                        Geen producten in het winkelmandje!
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+<%- include('common/header') %>
+<div class="container mt-lg-2">
+    <div class="row d-flex align-items-center">
+        <div class="col-md-8 col-sm-12"><h1>Vouchers beheren</h1></div>
+    </div>
+
+    <ul class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a
+                    class="nav-link active"
+                    id="ex2-tab-1"
+                    data-mdb-toggle="tab"
+                    href="#ex2-tabs-1"
+                    role="tab"
+                    aria-controls="ex2-tabs-1"
+                    aria-selected="true"
+            ><h4>Beheer</h4></a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a
+                    class="nav-link"
+                    id="ex2-tab-2"
+                    data-mdb-toggle="tab"
+                    href="#ex2-tabs-2"
+                    role="tab"
+                    aria-controls="ex2-tabs-2"
+                    aria-selected="false"
+            ><h4>Toevoegen</h4></a>
+        </li>
+    </ul>
+    <div class="tab-content" id="ex2-content">
+        <div
+                class="tab-pane fade show active"
+                id="ex2-tabs-1"
+                role="tabpanel"
+                aria-labelledby="ex2-tab-1"
+        >
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Prijs</th>
+                            <th scope="col">Acties</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% vouchers.forEach(function(voucher, i) { %>
+                            <tr id="<%= voucher.id %>">
+                                <th scope="row"><%= voucher.id %></th>
+                                <td><%= voucher.code %></td>
+                                <td><%= voucher.price %>&euro;</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" data-voucher-id="<%= voucher.id %>"
+                                            onclick="deleteVoucher(this)">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                </td>
+                            </tr>
+                        <%});%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div
+                class="tab-pane fade"
+                id="ex2-tabs-2"
+                role="tabpanel"
+                aria-labelledby="ex2-tab-2"
+        >
+            <div class="row h-100 wrapper form-wrapper">
+                <div class="col-sm-6 mx-auto mt-lg-5">
+                    <div class="card wow fade-in p-4" data-wow-delay="0.3s">
+                        <div class="card-body">
+                            <form method="POST" action="/admin/manage_vouchers/create" autocomplete="off">
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="code" class="form-control" name="code">
+                                    <label class="form-label" for="code">Voucher code</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="price" class="form-control" name="price">
+                                    <label class="form-label" for="price">Prijs</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Aanmaken</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('common/footer') %>
+

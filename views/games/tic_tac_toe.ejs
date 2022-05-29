@@ -1,0 +1,47 @@
+<div id="game_start_form" class="text-center mb-5 row">
+    <div class="col-sm-12 col-md-4 mt-2">
+        <input id="in_game_name" class="form-control" type="text" placeholder="Je in game naam!">
+    </div>
+    <div class="col-sm-12 col-md-2 mt-2">
+        <button id="start_game" class="btn btn-success w-100">START</button>
+    </div>
+</div>
+
+<div id="game_container" class="d-none">
+    <div class="player d-flex justify-content-center align-items-center ">
+        <div class="text-center player font-weight-bolder">
+            <div id="player_x_name"></div>
+            <div id="player_x" class="player_x mx-2"></div>
+        </div>
+        <div class="mx-2 font-weight-bolder ">VS</div>
+        <div class="text-center player font-weight-bolder">
+            <div id="player_o_name"><small>Waiting...</small></div>
+            <div id="player_o" class="player player_o mx-2"></div>
+        </div>
+    </div>
+
+    <div class="board mt-4" id="board">
+        <div class="cell" id="cell_1" data-cell></div>
+        <div class="cell" id="cell_2" data-cell></div>
+        <div class="cell" id="cell_3" data-cell></div>
+        <div class="cell" id="cell_4" data-cell></div>
+        <div class="cell" id="cell_5" data-cell></div>
+        <div class="cell" id="cell_6" data-cell></div>
+        <div class="cell" id="cell_7" data-cell></div>
+        <div class="cell" id="cell_8" data-cell></div>
+        <div class="cell" id="cell_9" data-cell></div>
+    </div>
+
+    <div class="text-center mt-5">
+        <button id="leave_game" class="btn btn-danger">Verlaat het spel</button>
+    </div>
+
+</div>
+<div class="winning-message" id="winningMessage">
+    <div data-winning-message-text class="text-center"></div>
+    <button id="restartButton" class="btn btn-info d-flex align-items-center ">
+        <span class="material-icons">restart_alt</span> Restart
+    </button>
+</div>
+<script type="text/javascript" src="../socket/socket.io.js"></script>
+<script type="text/javascript" src="../js/tic_tac_toe.js"></script>

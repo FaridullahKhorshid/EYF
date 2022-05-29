@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Snake Game</title>
+
+</head>
+<body>
+
+<canvas id="snake_game_board" width="400" height="400"></canvas>
+
+
+<div class="text-center mt-4">
+    <button id="key_up" onclick="btnMove(this)" data-moveDirection="38"
+            class="btn-start btn btn-warning btn-sm btm_move"><span class="material-icons">
+arrow_upward
+</span></button>
+    <button id="key_back" onclick="btnMove(this)" data-moveDirection="37"
+            class="btn-start btn btn-warning btn-sm btm_move"><span class="material-icons">
+arrow_back
+</span></button>
+    <button id="key_forward" onclick="btnMove(this)" data-moveDirection="39"
+            class="btn-start btn btn-warning btn-sm btm_move"><span class="material-icons">
+arrow_forward
+</span></button>
+    <button id="key-downward" onclick="btnMove(this)" data-moveDirection="40"
+            class="btn-start btn btn-warning btn-sm btm_move"><span class="material-icons">
+arrow_downward
+</span>
+    </button>
+</div>
+
+<div class="text-center mt-4">
+    <button id="restartButton" onclick="gameRestart(this)" class="btn-start btn btn-warning btn-sm ">Play Again</button>
+</div>
+
+
+<script>
+    const canvas = document.getElementById("snake_game_board");
+    const canvas_ctx = canvas.getContext("2d");
+    const speed = 5;
+
+    class PartSnake {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+
+    let tileCount = 20;
+    let tileSize = canvas.width / tileCount - 1
+    let headX = 5;
+    let headY = 5;
+    let partsSnake = [];
+    let lengthtail = 2;
+
+    let xVel = 0;
+    let yVel = 0;
+
+    let xApple = 10;
+    let yApple = 5;
+
+    let score = 0;
+    let restartButton = document.getElementById('restartButton');
+
+
+    //
+    function drawGame() {
+        changeSnakePosition();
+        let result = isGameOver();
+        if (result) {
+            return;
+        }
+        clearScreen();
+
+
+        checkApple();
+        drawSnake();
+        drawApple();
+        drawScore();
+        setTimeout(drawGame, 1000 / speed);
+    }
+
+
+    function isGameOver() {
+        let gameOver = false;
+
+        if (yVel === 0 && xVel === 0) {
+            return false;
+        }
+
+        if (headX < 0) {
+            gameOver = true;
+        } else if (headX === tileCount) {
+            gameOver = true;
+        } else if (headY < 0) {
+            gameOver = true;
+        } else if (headY === tileCount) {
+            gameOver = true;
+        }
+
+        for (let i = 0; i < partsSnake.length; i++) {
+            let part = partsSnake[i];
+            if (part.x === headX && part.y === headY) {
+                gameOver = true;
+                break;
+            }
+        }
+
+
+        if (gameOver) {
+            canvas_ctx.fillStyle = 'black';
+            canvas_ctx.font = '30px Arial';
+            canvas_ctx.fillText('Game over!', canvas.width / 3.3, canvas.height / 1.1)
+
+        }
+
+
+        return gameOver
+    }
+
+    function drawScore() {
+        canvas_ctx.fillStyle = "#BC6C25";
+        canvas_ctx.font = "20px Arial solid";
+        canvas_ctx.fillText("Points: " + score, canvas.width - 390, 390);
+    }
+
+    function gameRestart() {
+
+        tileCount = 20;
+        tileSize = canvas.width / tileCount - 1
+        headX = 5;
+        headY = 5;
+        partsSnake = [];
+        lengthtail = 2;
+
+        xVel = 0;
+        yVel = 0;
+
+        xApple = 10;
+        yApple = 5;
+
+        score = 0;
+
+        drawGame();
+    }
+
+    function clearScreen() {
+        canvas_ctx.fillStyle = 'white';
+        canvas_ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    }
+
+
+    function drawSnake() {
+        canvas_ctx.fillStyle = '#BC6C25';
+        for (let i = 0; i < partsSnake.length; i++) {
+            let part = partsSnake[i];
+            canvas_ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize, tileSize)
+        }
+        partsSnake.push(new PartSnake(headX, headY));
+        if (partsSnake.length > lengthtail) {
+            partsSnake.shift();
+        }
+        canvas_ctx.fillStyle = '#283618';
+        canvas_ctx.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize)
+
+    }
+
+
+    function changeSnakePosition() {
+        headX = headX + xVel;
+        headY = headY + yVel;
+    }
+
+    function drawApple() {
+        canvas_ctx.fillStyle = 'orange';
+        canvas_ctx.fillRect(xApple * tileCount, yApple * tileCount, tileSize, tileSize)
+    }
+
+    function checkApple() {
+        if (xApple === headX && yApple === headY) {
+            xApple = Math.floor(Math.random() * tileCount);
+            yApple = Math.floor(Math.random() * tileCount);
+            lengthtail++;
+            score++;
+        }
+    }
+
+
+    document.addEventListener('keydown', function (event) {
+        keyDown(event["keyCode"])
+    });
+
+    function keyDown(keyCode) {
+        keyCode = parseInt(keyCode);
+
+        if (keyCode === 38) {
+            if (yVel === 1)
+                return;
+            yVel = -1;
+            xVel = 0;
+        }
+        if (keyCode === 40) {
+            if (yVel === -1)
+                return;
+            yVel = 1;
+            xVel = 0;
+        }
+        if (keyCode === 37) {
+            if (xVel === 1)
+                return;
+            yVel = 0;
+            xVel = -1;
+        }
+        if (keyCode === 39) {
+            if (xVel === -1)
+                return;
+            yVel = 0;
+            xVel = 1;
+        }
+    }
+
+    function btnMove(btn) {
+        console.log(btn.dataset);
+        keyDown(btn.dataset.movedirection);
+    }
+
+
+    drawGame();
+
+
+</script>
+
+</body>
+</html>
+
+
+

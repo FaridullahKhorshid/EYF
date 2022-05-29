@@ -1,0 +1,121 @@
+<%- include('common/header') %>
+<div class="container mt-lg-2">
+    <div class="row d-flex align-items-center">
+        <div class="col-md-8 col-sm-12"><h1>Admin functies</h1></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-lg-3 p-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span style="font-size: 155px;" class="material-icons">shopping_cart</span>
+                    <span style="font-size: 14px;" id="order_badge"
+                          class="badge rounded-pill badge-notification bg-danger">
+                        <%= openOrders %>
+                    </span>
+                    <h5 class="card-title">Open Bestellingen</h5>
+                    <a href="/order" class="btn btn-primary d-flex justify-content-center align-items-center">
+                        Bekijken
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 p-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span style="font-size: 155px;" class="material-icons">history</span>
+                    <h5 class="card-title">Bestelling geschiedenis</h5>
+                    <a href="/admin/order_history"
+                       class="btn btn-primary d-flex justify-content-center align-items-center">
+                        openen
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4 col-lg-3 p-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span style="font-size: 155px;" class="material-icons">manage_accounts</span>
+                    <h5 class="card-title">Gebruikers beheren</h5>
+                    <a href="/admin/manage_users"
+                       class="btn btn-primary d-flex justify-content-center align-items-center">
+                        openen
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 p-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span style="font-size: 155px;" class="material-icons">local_activity</span>
+                    <h5 class="card-title">Vouchers beheren</h5>
+                    <a href="/admin/manage_vouchers"
+                       class="btn btn-primary d-flex justify-content-center align-items-center">
+                        openen
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 p-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span style="font-size: 155px;" class="material-icons">network_wifi</span>
+                    <h5 class="card-title">Wifi wachtwoord</h5>
+                    <a href="/admin/password_wifi"
+                       class="btn btn-primary d-flex justify-content-center align-items-center">
+                        openen
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 p-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span style="font-size: 155px;" class="material-icons">network_wifi</span>
+                    <h5 class="card-title">Reset wifi wachtwoord</h5>
+                    <a href="/admin/reset_wifi_pwd"
+                       class="btn btn-primary d-flex justify-content-center align-items-center">
+                        Reset wachtwoord wifi
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 p-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span style="font-size: 155px;" class="material-icons">network_wifi</span>
+                    <h5 class="card-title">PFIS halt</h5>
+                    <a href="/admin/suspend_system"
+                       class="btn btn-primary d-flex justify-content-center align-items-center">
+                        Halt PFIS
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 p-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span style="font-size: 155px;" class="material-icons">network_wifi</span>
+                    <h5 class="card-title">PFIS start</h5>
+                    <a href="/admin/start_system"
+                       class="btn btn-primary d-flex justify-content-center align-items-center">
+                        Start PFIS
+                    </a>
+                </div>
+            </div>
+        </div>
+<!--        <div class="col-sm-6 col-md-4 col-lg-3 p-2">-->
+<!--            <div class="card">-->
+<!--                <div class="card-body text-center">-->
+<!--                    <span style="font-size: 155px;" class="material-icons">cable</span>-->
+<!--                    <h5 class="card-title">Usb beheren</h5>-->
+<!--                    <a href="#" class="btn btn-primary d-flex justify-content-center align-items-center">-->
+<!--                        openen-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<%- include('common/footer') %>

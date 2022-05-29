@@ -1,0 +1,37 @@
+<%- include('common/header') %>
+<div class="container mt-4">
+
+    <div class="row h-100 wrapper form-wrapper">
+        <div class="col-sm-6 mx-auto mt-lg-5">
+
+            <!--Form with header-->
+            <div class="card wow fade-in p-4" data-wow-delay="0.3s">
+                <div class="card-body">
+                    <form id="voucher_form">
+                        <div class=" mb-4">
+                            Om gebruik te kunnen maken van de betaalde internetdiensten dient u hieronder de
+                            voucher-code in te voeren
+                            die verstrekt is door de cabinepersoneel.
+                        </div>
+                        <div class="alert alert-success d-none" id="voucher_success" role="alert"
+                             data-mdb-color="success">
+                            Bedankt! vanaf nu kunt u gebruikt maken van het reguliere internet.
+                        </div>
+                        <div class="alert alert-danger d-none" id="voucher_err" role="alert" data-mdb-color="success">
+                            Helaas! ongeldige voucher code ingevoerd!.
+                        </div>
+                        <!-- Name input -->
+                        <div class="form-outline mb-4">
+                            <input type="text" id="voucher_code" name="code" class="form-control"/>
+                            <label class="form-label" for="voucher_code">Voucher code</label>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block mb-4">Indienen</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('common/footer') %>
+<script type="text/javascript" src="/js/voucher.js"></script>

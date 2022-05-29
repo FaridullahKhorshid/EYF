@@ -1,0 +1,153 @@
+.app
+  position: relative
+  overflow: hidden
+  top: 19px
+  height: calc(100% - 38px)
+  margin: auto
+  padding: 0
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .06), 0 2px 5px 0 rgba(0, 0, 0, .2)
+
+.app-one
+  border-radius: 8px
+  background-color: #f7f7f7
+  height: 100%
+  overflow: hidden
+  margin: 0
+  padding: 0
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .06), 0 2px 5px 0 rgba(0, 0, 0, .2)
+
+  .heading
+    padding: 10px 16px
+    margin: 0
+    width: 100%
+    background-color: #BC6C25
+    z-index: 1000
+    color: white
+
+.messenger_content
+  height: 600px
+
+.conversation
+  padding: 0 !important
+  margin: 0 !important
+  height: 100%
+
+.message
+  position: relative
+  padding: 2px !important
+  margin: 0 !important
+  background-size: cover
+  overflow-y: auto
+  //border: 1px solid #f7f7f7
+  height: 550px
+  //height: calc(100% - 120px)
+  background-color: #4d4e4e
+
+  #user_typing
+    color: white
+    padding: 2px
+    position: absolute
+    bottom: 0
+    width: auto
+    background-color: #4d4e4e
+
+  .content
+    max-width: 85% !important
+    width: auto !important
+    padding: 4px 10px 7px !important
+    background: #ffffff
+    font-size: 12px
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .2)
+    word-wrap: break-word
+    display: inline-block
+
+    img
+      max-width: 90%
+      object-fit: contain
+      border-radius: 5px
+
+  .receiver
+    background: #FEFAE0
+    border-radius: 10px 10px 10px 0
+
+  .sender
+    background: #c4e5ff
+    border-radius: 10px 10px 0 10px
+
+  .message-user-meta
+    font-size: 16px
+    font-weight: bold
+    color: #BC6C25
+    opacity: 0.7
+
+    small
+      font-size: 11px
+      color: black
+
+.message-body
+  margin: 0 !important
+  padding: 0 !important
+  width: auto
+  height: auto
+
+.message-text
+  margin: 0 !important
+  word-wrap: break-word
+  font-weight: 200
+  font-size: 14px
+  padding-bottom: 0 !important
+
+.reply
+  height: 60px
+  background-color: #f5f1ee
+  padding: 10px 5px 10px 5px !important
+  margin: 0 !important
+  z-index: 1000
+
+.reply-main
+  padding: 2px 5px !important
+
+  textarea
+    width: 100%
+    resize: none
+    overflow: hidden
+    padding: 5px !important
+    outline: none
+    border: none
+    text-indent: 5px
+    box-shadow: none
+    height: 100%
+    font-size: 16px
+
+    &:focus
+      outline: none
+      border: none
+      text-indent: 5px
+      box-shadow: none
+
+#chat_on_button
+  position: fixed
+  z-index: 10
+  width: 45px
+  height: 45px
+  right: 15px
+  bottom: 20px
+  background-color: #8a57cf
+  color: #fff
+  border-radius: 50%
+  text-align: center
+  padding: 9px
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important
+  cursor: pointer
+  display: block
+
+// mobile view
+@media only screen and (max-width: 600px)
+  #messenger
+    width: 100% !important
+    height: 100% !important
+    bottom: 0
+    right: 0
+    left: 0
+    top: 0
+

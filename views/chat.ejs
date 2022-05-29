@@ -1,0 +1,96 @@
+<!-- including header -->
+<%- include('common/header') %>
+
+<div id="messenger" class="container mt-2">
+
+    <div id="messenger_container" class="app-one ">
+
+        <div class="col-sm-12 conversation">
+
+            <% if (usernameChat && room ){ %>
+
+                <div class="heading d-flex">
+                    <div id="" class="pointer d-flex w-50">
+                        <span class="material-icons mx-2">chat</span>
+                        <strong class="chat-title"><%= room %></strong>
+                    </div>
+
+                    <div class=" w-50 text-end">
+                        <span id="leave_chat_button" class="material-icons pointer">close</span>
+                    </div>
+                </div>
+
+                <div class="message px-1" id="conversation">
+                    <div id="conversation_messages">
+
+                    </div>
+                    <small id="user_typing"></small>
+                </div>
+
+                <div class="reply row">
+                    <div class="col-8 reply-main">
+                        <textarea class="form-control" rows="1" id="chat_message"></textarea>
+                    </div>
+                    <div class="col-2 px d-flex align-items-center justify-content-center  ">
+                        <label for="chat_file" class="btn w-100 d-flex align-items-center justify-content-center">
+                            <span class="material-icons">insert_photo</span>
+                        </label>
+                        <input type="file" id="chat_file" class="form-control d-none" name="chat_image"
+                               accept="image/png, image/gif, image/jpeg"/>
+                    </div>
+                    <div id="send_chat_message"
+                         class="col-2 reply-send d-flex align-items-center justify-content-center btn">
+                        <span class="material-icons Icon ">send</span>
+                    </div>
+                </div>
+
+            <% }else { %>
+
+                <div class="heading d-flex">
+                    <div id="" class="pointer d-flex w-50">
+                        <span id="leave_chat_button" class="material-icons mx-2">chat</span>
+                        <strong class="chat-title">Tulip Air Chat</strong>
+                    </div>
+
+                </div>
+
+                <div class="messenger_content">
+
+                    <div class="container-fluid mt-2">
+                        <!-- Email input -->
+
+                        <form id="chat_create_room_form" action="/chat">
+                            <h5 class="">Maak een kamer aan of join een met de code!</h5>
+
+                            <div class="my-2">
+                                <label class="form-label" for="username">Gebruikers naam</label>
+                                <input autocomplete="off" type="text" name="username" id="username" class="form-control"
+                                       placeholder="Naam 'Tulip'" required/>
+                            </div>
+                            <div class="my-2">
+                                <label class="form-label d-flex" for="room_name">Kamer code
+                                    <span data-mdb-toggle="tooltip"
+                                          title="De standaard chat groep is TulipAir! Type hier onder de kamer code om zelf groep aan te maken of joinen."
+                                          class="material-icons mx-2">info</span>
+                                </label>
+                                <input autocomplete="off" type="text" name="room" id="room_name"
+                                       class="form-control"
+                                       placeholder="Kamer code 'TulipAir'" value="TulipAir" required/>
+                            </div>
+
+                            <button type="submit" class="btn btn-success w-100">Doorgaan</button>
+                        </form>
+                    </div>
+                </div>
+
+            <% } %>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- including footer -->
+<%- include('common/footer') %>
+<script type="text/javascript" src="../socket/socket.io.js"></script>
+<script type="text/javascript" src="/js/chat.js"></script>

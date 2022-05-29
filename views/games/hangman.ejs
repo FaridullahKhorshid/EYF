@@ -1,0 +1,258 @@
+<div class="container flex">
+    <div class="left_side gallows">
+        <div class="crossbarOne"></div>
+        <div class="floor"></div>
+        <div class="crossbar"></div>
+        <div class="post">
+            <div class="deadguy head"></div>
+            <div class="deadguy body">
+                <div class="deadguy right-arm"></div>
+                <div class="deadguy left-arm"></div>
+                <div class="deadguy left-leg"></div>
+                <div class="deadguy right-leg"></div>
+            </div>
+        </div>
+    </div>
+    <div class="right_side">
+        <h1>Hangman game</h1>
+        <div class="choose_theme">
+            Choose a theme<br><br>
+            <button type="button" class="theme" value="0">Stad</button>
+            <button type="button" class="theme" value="1">Fruit</button>
+            <button type="button" class="theme" value="2">Landen</button>
+        </div>
+        <div id="theme_display"></div>
+        <div id="result_display"></div>
+        <div id="word_display"></div>
+        <br>
+        <div id="keybord"></div>
+        <br>
+        <button type="button" class="new_game">New game</button>
+    </div>
+</div>
+<div>Tijd loopt af in <span id="time">03:00</span> minutes!</div>
+<script>
+// Invoeren van tijd/ timer en de werking ervan
+    function startTimer(duration, display) {
+      var timer = duration, minutes, seconds;
+      setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          timer = duration;
+        }
+      }, 1000);
+    }
+    var threeMinutes = 60 * 3,
+            display = document.getElementById('time');
+
+        // Shuffle function: https://javascript.info/task/shuffle
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Variables
+        var i,
+            alphabet,
+            newAlphabet,
+            letters,
+            letter,
+            themeId,
+            themeText,
+            theWord;
+
+        var space = "_",
+            hiddenWord = "",
+            count = 0,
+            fail = 0,
+            alphabetArray = [],
+            hiddenWordSplit = [],
+            theWordSplit = [];
+
+        var themes = document.querySelectorAll(".theme"),
+            wordDisplayed = document.getElementById("word_display"),
+            keybordDisplay = document.getElementById("keybord"),
+            resultDisplay = document.getElementById("result_display"),
+            themeButton = document.querySelector(".choose_theme"),
+            themeDisplay = document.getElementById("theme_display"),
+            newGameButton = document.querySelector(".new_game");
+
+        var guessWord =
+            [{
+                theme: "Stad",
+                word: ["Barcelona", "Lisabon", "London", "Amsterdam", "Rome", "Berlijn"]
+            }, {
+                theme: "Fruit",
+                word: ["Appel", "Aardbei", "Watermeloen", "Bessen", "Banaan"]
+            }, {
+                theme: "Landen",
+                word: ["Italie", "Zwitserland", "Spanje", "Zweden", "Engeland"]
+            }];
+
+        window.onload = function () {
+            themes.forEach(theme => theme.addEventListener("click", startGame));
+            newGameButton.style.display = "none";
+            keybordDisplay.style.display = "none";
+            themeDisplay.style.display = "none";
+        };
+
+        // Set the theme and choose a random word
+        function startGame() {
+            newGameButton.style.display = "inline";
+            themeDisplay.style.display = "inline";
+            themeId = this.getAttribute("value");
+            themeText = this.innerHTML;
+            themeDisplay.innerHTML += "Theme: " + themeText;
+            shuffle(guessWord[themeId].word);
+            theWord = guessWord[themeId].word[0].toUpperCase();
+            displayWord();
+            startTimer(threeMinutes, display);
+        };
+
+        // Display van getallen en dezelfde nummer "_"
+        function displayWord() {
+            themeButton.style.display = "none";
+            keybordDisplay.style.display = "block";
+            theWordSplit = theWord.split("");
+            for (i = 1; i <= theWord.length; i++) {
+                hiddenWord = hiddenWord + space;
+            }
+            hiddenWordSplit = hiddenWord.split("");
+            for (i = 0; i < theWordSplit.length; i++) {
+                if (theWordSplit[i] === " ") {
+                    theWordSplit[i] = "&nbsp;";
+                    hiddenWordSplit[i] = "&nbsp;";
+                    count++;
+                }
+            }
+            wordDisplayed.innerHTML = hiddenWordSplit.join("&#160;");
+        }
+
+        // Display keyboard Alfabet toetsenbord toegevoegd
+        function keyboard() {
+            alphabet = "qwertyuiopasdfghjklzxcvbnm";
+            newAlphabet = alphabet.toUpperCase();
+            alphabetArray = newAlphabet.split('');
+            for (i = 0; i < alphabetArray.length - 1; i++) {
+                if (alphabetArray[i] == " ") {
+                    alphabetArray[i] = "&nbsp;";
+                }
+                keybordDisplay.innerHTML += '<button type="button" class="letter">'
+                    + alphabetArray[i] + "</button>";
+                if (i == 9 || i == 20) {
+                    keybordDisplay.innerHTML += "<br>";
+                }
+            }
+            letters = document.querySelectorAll(".letter");
+            letters.forEach(letter => letter.addEventListener("click", pressedKey));
+        }
+
+        keyboard();
+
+        // Verzamelen van gebruikers keuze/invoer
+        function pressedKey() {
+            letter = this.innerHTML;
+            this.setAttribute("disabled", "");
+            checkMatch();
+        }
+
+        // Controle van letter
+        function checkMatch() {
+            if (theWordSplit.indexOf(letter) == -1) {
+                fail++;
+                drawHangman();
+                if (fail == 6) {
+                    resultDisplay.innerHTML = "<span style='color: orange;'>> Game over!</span>";
+                    endGame();
+                }
+            }
+            for (i = 0; i < theWord.length; i++) {
+                if (theWordSplit[i] === letter) {
+                    count++;
+                    hiddenWordSplit[i] = letter;
+                }
+                wordDisplayed.innerHTML = hiddenWordSplit.join("&#160;");
+            }
+            if (count === theWord.length) {
+                resultDisplay.innerHTML = "<span style='color: darkgreen;'>> You win!</span>";
+                endGame();
+            }
+        }
+
+        // Lijnen tekenen bij het verkeerd invoeren van letters
+        function drawHangman() {
+            switch (fail) {
+                case 0:
+                    document.querySelector(".deadguy.head").style.visibility = "hidden";
+                    document.querySelector(".deadguy.body").style.visibility = "hidden";
+                    document.querySelector(".deadguy.right-arm").style.visibility = "hidden";
+                    document.querySelector(".deadguy.left-arm").style.visibility = "hidden";
+                    document.querySelector(".deadguy.left-leg").style.visibility = "hidden";
+                    document.querySelector(".deadguy.right-leg").style.visibility = "hidden";
+                    break;
+                case 1:
+                    document.querySelector(".deadguy.head").style.visibility = "visible";
+                    break;
+                case 2:
+                    document.querySelector(".deadguy.body").style.visibility = "visible";
+                    break;
+                case 3:
+                    document.querySelector(".deadguy.right-arm").style.visibility = "visible";
+                    break;
+                case 4:
+                    document.querySelector(".deadguy.left-arm").style.visibility = "visible";
+                    break;
+                case 5:
+                    document.querySelector(".deadguy.left-leg").style.visibility = "visible";
+                    break;
+                case 6:
+                    document.querySelector(".deadguy.right-leg").style.visibility = "visible";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        drawHangman();
+
+        // Einde van het spel
+        function endGame() {
+            newGameButton.style.display = "inline";
+            letters.forEach(letter => letter.removeEventListener("click", pressedKey));
+        }
+
+        // Begin/ start van het spel
+        newGameButton.addEventListener("click", newGame);
+
+        function newGame() {
+            fail = 0;
+            count = 0;
+            theWordSplit = [];
+            hiddenWordSplit = [];
+            wordDisplayed.innerHTML = "";
+            resultDisplay.innerHTML = "";
+            themeDisplay.innerHTML = "";
+            space = "_";
+            hiddenWord = "";
+            themeButton.style.display = "block";
+            keybordDisplay.style.display = "none";
+            newGameButton.style.display = "none";
+            letters.forEach(function (letter) {
+                letter.removeAttribute("disabled", "")
+            });
+            letters.forEach(letter => letter.addEventListener("click", pressedKey));
+            drawHangman();
+        }
+
+</script>
+
+

@@ -1,0 +1,35 @@
+<%- include('common/header') %>
+<div class="container mt-lg-2">
+
+    <div class="row d-flex align-items-center">
+        <div class="col-md-8 col-sm-12"><h1>Games</h1></div>
+        <div class="col-md-4 col-sm-12">
+            <input id="search" class="form-control" placeholder="Zoeken...">
+        </div>
+    </div>
+
+    <div class="row">
+        <% games.forEach((game, i) =>{ %>
+            <div class="col-sm-6 col-md-4 col-lg-3 p-2 searchable_item" data-search="<%= game.name %>">
+
+                <div class="card">
+                    <div class="view overlay thumbnail-view">
+                        <img src="<%= game.thumbnail %>" class="card-img-top thumbnail-image"
+                             alt="<%= game.name %>">
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><%= game.name %></h5>
+
+                        <a href="/game/play?game=<%= game.code%>"
+                           class="btn btn-success d-flex justify-content-center align-items-center">
+                            <span class="material-icons mr-1">play_circle</span>
+                            <strong>Play</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<%- include('common/footer') %>
